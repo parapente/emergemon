@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="emon">
+    <file>images/application-exit.png</file>
+    <file>images/gentoo-logo.svg</file>
+  </qresource>
+</RCC>
