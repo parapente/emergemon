@@ -7,7 +7,7 @@ import dbus.mainloop.qt
 import dbus
 
 class emMainWidget(QtGui.QDialog, Ui_Dialog):
-    logfname = '/home/oscar/emerge.log'
+    logfname = '/var/log/emerge.log'
 
     def __init__(self, parent=None):
         super(emMainWidget, self).__init__(parent)
