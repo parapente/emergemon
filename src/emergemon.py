@@ -5,7 +5,7 @@ __author__="Theofilos Intzoglou"
 __date__ ="$18 Ιαν 2011 5:24:40 μμ$"
 
 import sys
-from emmainwin import emMainWidget
+from lib.emmainwin import emMainWidget
 from PyQt4 import QtGui
 
 if __name__ == "__main__":
