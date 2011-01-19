@@ -39,7 +39,7 @@ class readThread(QtCore.QThread):
                 self.signalTotalPackages.emit(tmp.toInt()[0])
         pos = line.indexOf('===')
         if (pos != -1):
-            if line.contains('Merging'): # We are about in the middle
+            if line.contains(' Merging'): # We are about in the middle
                 self.signalIncPerc.emit(0.5)
             if line.contains('Post-Build'):
                 self.signalIncPerc.emit(0.4)
