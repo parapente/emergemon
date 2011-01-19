@@ -43,9 +43,9 @@ class emMainWidget(QtGui.QDialog, Ui_Dialog):
             self.thread.signalResetPerc.connect(self.slotResetPerc)
             self.fwatch.fileChanged.connect(self.thread.slotRead)
 
-        self.curPerc = 0.0
-        self.totalPackages = 0.0
-        self.lastPerc = 0.0
+        self.curPerc = 0
+        self.totalPackages = 0
+        self.lastPerc = 0
 
     def createActions(self):
         self.quitAction = QtGui.QAction(QtGui.QIcon(':/emon/images/application-exit.png'), '&Quit', self, triggered=QtGui.qApp.quit)
@@ -79,7 +79,8 @@ class emMainWidget(QtGui.QDialog, Ui_Dialog):
         print 'TotalPackages:',num
 
     def slotResetPerc(self):
-        self.curPerc = 0.0
+        self.curPerc = 0
+        self.lastPerc = 0
         self.trayIcon.setIcon(self.idleIcon)
 
     def slotSetStatus(self,line):
