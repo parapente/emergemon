@@ -1,0 +1,10 @@
+* Show current elog messages
+* Colorize elog messages
+* Show full emerge.log
+    * Search function in emerge.log
+    * Colorize emerge.log messages
+* Open past elogs
+    * Seperate elogs for each emerge invokation
+* Execute emerge --sync
+* Execute emerge -puvtD world
+* Execute emerge -quvD world
