@@ -1,0 +1,10 @@
+Building and Installing Emergemon
+---------------------------------
+
+First execute:
+
+python build.py
+
+and then a simple:
+
+python setup.py install should be enough!
