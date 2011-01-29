@@ -1,3 +1,1 @@
 include build.py
-prune src/ui/emergemon_rc.py
-prune src/ui/ui_emergemon.py
