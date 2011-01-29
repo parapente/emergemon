@@ -79,7 +79,10 @@ class emMainWidget(QtGui.QMainWindow, Ui_MainWindow):
         print 'Perc:',self.curPerc
 
     def slotTotalPackages(self,num):
-        self.totalPackages = num
+        if num != self.totalPackages: # A package failed to build and we have --keep-going
+            self.curPerc = 0
+            self.lastPerc = 0
+            self.totalPackages = num
         print 'TotalPackages:',num
 
     def slotResetPerc(self):
