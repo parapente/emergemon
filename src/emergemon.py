@@ -17,6 +17,5 @@ if __name__ == "__main__":
     app.setQuitOnLastWindowClosed(False)
 
     widget = emMainWidget()
-    #widget.show()
 
     sys.exit(app.exec_())

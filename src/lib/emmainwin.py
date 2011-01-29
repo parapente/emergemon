@@ -1,13 +1,13 @@
 # -*- coding: utf-8
 
 from PyQt4 import (QtGui, QtCore)
-from ui.ui_emergemon import Ui_Dialog
 from emreadthread import readThread
 import dbus.mainloop.qt
 import dbus
+from ui.ui_emergemon import Ui_MainWindow
 
-class emMainWidget(QtGui.QDialog, Ui_Dialog):
-    logfname = '/var/log/emerge.log'
+class emMainWidget(QtGui.QMainWindow, Ui_MainWindow):
+    logfname = '/home/oscar/emerge.log'
 
     def __init__(self, parent=None):
         super(emMainWidget, self).__init__(parent)
@@ -42,10 +42,13 @@ class emMainWidget(QtGui.QDialog, Ui_Dialog):
             self.thread.signalIncPerc.connect(self.slotIncPerc)
             self.thread.signalResetPerc.connect(self.slotResetPerc)
             self.fwatch.fileChanged.connect(self.thread.slotRead)
+            self.trayIcon.activated.connect(self.slotTrayIconActivated)
+            self.action_Quit.triggered.connect(self.quitAction.trigger)
 
         self.curPerc = 0
         self.totalPackages = 0
         self.lastPerc = 0
+        self.visible = False
 
     def createActions(self):
         self.quitAction = QtGui.QAction(QtGui.QIcon(':/emon/images/application-exit.png'), '&Quit', self, triggered=QtGui.qApp.quit)
@@ -65,8 +68,9 @@ class emMainWidget(QtGui.QDialog, Ui_Dialog):
         if ((self.curPerc - self.lastPerc) >= 1) or (self.lastPerc == 0): # Update systray icon
             self.pixmap = self.idleIcon.pixmap(256)
             p = QtGui.QPainter(self.pixmap)
+            #p.fillRect(QtCore.QRect(0,78,256,100),QtCore.Qt.gray)
             f = QtGui.QFont()
-            f.setPointSize(72)
+            f.setPointSize(64)
             f.setBold(True)
             p.setFont(f)
             p.drawText(self.pixmap.rect(),QtCore.Qt.AlignCenter,QtCore.QString.number(round(self.curPerc))+'%')
@@ -85,3 +89,12 @@ class emMainWidget(QtGui.QDialog, Ui_Dialog):
 
     def slotSetStatus(self,line):
         self.trayIcon.setToolTip(line)
+
+    def slotTrayIconActivated(self,reason):
+        if reason == QtGui.QSystemTrayIcon.Trigger:
+            if self.visible == False:
+                self.show()
+                self.visible = True
+            else:
+                self.hide()
+                self.visible = False
